@@ -1,0 +1,184 @@
+/* Hide the arrow buttons */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Ensure that the number input field still has a valid styling */
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+
+
+.sktnav{
+    display: block;
+    margin: auto;
+    
+  }
+  /* *{
+    background-color: #e0f2fe;
+  } */
+  .bgcolorform{
+    background-color: #e0f2fe !important;
+  }
+  .form{
+    margin-left:150px;
+    margin-top:30px;
+    float: left;
+    /* border: 2px solid; */
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 65%;
+    justify-content: center;
+    padding:10px;
+    background-color:#eceff1!important;
+  
+  }
+  .form label{
+    font-weight:700;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 20px;
+  }
+  .form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 90%;
+    margin-left: 20px;
+  }
+  .datainput {
+    background-color:#efefee  !important
+  }
+  .form input::placeholder {
+    font-family: Arial, Helvetica, sans-serif;
+    color: grey;
+  
+   
+   }
+  .show-image{
+    width:300px;
+    height:300px;
+    margin-top: 50px;
+    padding-left: 20%;
+    display: flex;
+    flex-direction: row;
+  
+  }
+   .submit-button {
+    width: 100px;
+    height: 40px;
+    margin-top: -40px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    position: relative;
+    background-color: lightgrey!important;
+    color: black;
+    font-weight: bold;
+    margin-left: 20px;    
+    padding: auto;
+  padding-top: 6px;
+    justify-content: center;
+    text-align: center;
+  }
+  .cancel-button{
+    width: 100px;
+  height: 40px;
+  margin-top: -40px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+  position: relative;
+  background-color: lightgrey!important;
+  color: black;
+  font-weight: bold;
+  margin-left: 20px;
+  /* padding-top: 6px;
+
+  padding-left: 3px; */
+  padding: auto;
+  padding-top: 6px;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+
+  
+  }
+  #btndata:hover{
+ background-color: #22d3ee !important;
+  }
+  .dashboard-button{
+    width: 100px;
+    height: 40px;
+    margin-top: -40px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    position: relative;
+    background-color: lightgrey!important;
+    border: none;
+    color: black;
+    font-weight: bold;
+    margin-left: 20px;
+    padding: auto;
+    padding-top: 6px;
+    justify-content: center;
+    text-align: center;
+  }
+  .upload{
+  
+    border-radius: 2px;
+   font-weight: bold;
+  }
+  /* a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color:grey;
+    color: #fff;
+    text-decoration:none;
+    border-radius: 5px;
+    width:10rem ;
+   
+  } */
+  .imagecontainer{
+    display: flex;
+    /* justify-content: center; */
+    padding-left: 80px;
+    padding-top: 70px;
+    
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content:space-evenly;
+    margin-top: 1px;
+    margin-bottom: -5px; 
+  }
+  .custom-file-label::after {
+    content: ""; /* Change this text as per your requirement */
+  }
+  .custom-select {
+    position: relative;
+  }
+  
+  .custom-arrow {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 6px 0 6px; /* Adjust arrow size */
+    border-color: #000 transparent transparent transparent; /* Adjust arrow color */
+  }
+  
+  
+  
+  
+  

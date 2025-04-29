@@ -1,0 +1,657 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
+
+
+body {
+    margin: 0;
+    font-family: 'Roboto Slab', sans-serif;
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: auto;
+    position: relative;    
+}
+
+/* .circles {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+}
+
+.circles li:nth-child(1){
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+}
+.circles li:nth-child(2){
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+}
+
+.circles li:nth-child(3){
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+}
+
+.circles li:nth-child(4){
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.circles li:nth-child(5){
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+}
+
+.circles li:nth-child(6){
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+}
+
+.circles li:nth-child(7){
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+}
+
+.circles li:nth-child(8){
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+}
+
+.circles li:nth-child(9){
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+}
+
+.circles li:nth-child(10){
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+}
+
+
+@keyframes animate {
+
+    0%{
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+
+    100%{
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+
+} */
+
+/* ----------nav bar start--------- */ 
+.navbar{
+    background: rgb(3,90,186);
+    background: linear-gradient(90deg, rgba(3,90,186,1) 61%, rgba(148,187,233,1) 100%); 
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    
+}
+/* .nav-container{
+    display: inline-block;
+    text-align: center;
+} */
+ .nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}  
+.logo{
+    text-align: center;
+    margin-left: 100px;
+    opacity: 50px;
+}
+ .log-out button{
+    /* float: right; */
+    display: inline-block;
+    justify-content: end;
+    /* align-items: end; */
+    margin-left: 550px;
+} 
+.log-out button:hover{
+    color: #fff;
+}
+/* ----------nav bar end--------- */
+
+
+
+
+/* ----------dash board start--------- */
+.sidebar{
+    background: rgb(3,90,186);
+    background: linear-gradient(180deg, rgba(3,90,186,1) 21%, rgba(148,187,233,1) 100%);
+}
+
+.logo img{
+    width: 250px;
+    height: 35px;
+}
+.main li:hover{
+   color: #000;
+}
+/* .main-button:hover{
+    background-color: #39aae1;
+} */
+
+.main-button {
+    position: relative;
+    overflow: hidden;  
+}
+
+.main-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: #78a5e9; 
+    transition: all 0.35s ease-in;
+    z-index: 0;
+    transform: translateX(-100%); 
+}
+
+.main-button:hover::after {
+    transform: translateX(0); 
+}
+.main-button span, .main-button img {
+    position: relative; 
+    z-index: 1; 
+    /* margin-bottom: 20px;
+    padding: 0; */
+}
+
+.logout-button{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    
+}
+.logout-button button{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logout-button img{
+    margin-right:8px;
+ 
+}
+.logout-button:hover{
+    color: #000;
+    background-color: #78a5e9; ;
+}
+.user{
+    /* margin-top: 40px; */
+    margin-top: 20px;
+
+    margin-left: 50px;
+    display: block;  
+}
+.user strong{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* ----------dashboard end--------- */
+
+
+
+/* ----------Diamond Master Page start-------- */
+
+.table-container-one{
+    margin-top: 50px;
+    width: auto;
+}
+.table-container-one table:hover{
+    box-shadow: 0 4px 8px 0;
+}
+.table-container-two table{
+    margin: 0 0 10px 0;
+}
+.table-container-two .edit:hover{
+    background-color: rgba(3,90,186,1);
+    color:#fff;
+}
+.table-container-two .delete:hover{
+    background-color: rgb(224, 54, 54);
+    color: #fff;
+}
+/* ----------Diamond Master Page end-------- */
+
+
+
+/* -----------Combination Grid start----------- */
+/* .product-table-container table:hover,
+.table-container-total table:hover, 
+.table-container-gold table:hover,
+.table-container-goldmc table:hover,
+.table-container-wastage table:hover,
+.table-container-hallmark table:hover,
+.table-container-pt table:hover,
+.table-container-ptmc table:hover,
+.table-container-diamond table:hover,
+.table-container-clrstn table:hover,
+.table-container-certification table:hover,
+.table-container-handle table:hover,
+.table-container-dt:hover,
+.add-clrstn table:hover,
+.add-diamond table:hover
+{
+    box-shadow: 0 4px 8px 0;
+} */
+/* .table-container-clrstn{
+    margin-left: 30px;
+} */
+/* -----------Combination Grid end----------- */
+table th{
+    background-color: #dbeafe;
+    border-color: rgb(111, 169, 231);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #333;
+    font-size: medium;
+    font-weight: 50px;
+    opacity: none;
+    text-align: center;
+}
+table td{
+    border-color: rgb(177, 210, 245);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #333;
+    font-weight: normal;
+    text-align: center;
+}
+table{
+    width: 100%;
+    height: auto;
+    margin-left: 20px;
+    font-size: 15px;
+    box-shadow: none !important;
+    --tw-shadow:unset;
+}
+div {
+    box-shadow: none !important;
+    
+}
+
+.combination-grid{
+    overflow-x: scroll;
+    /* overflow-y: scroll; */
+    white-space: nowrap;
+    display: flex;
+    max-width: 100vw;
+    min-width: 1000px;
+}
+.checkbox-container{
+    position: relative;
+}
+.combination-submit-button button{
+    position: absolute;
+    top:50px;
+    right:50px;  
+    margin-left: 800px;
+}
+.diamond-list {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    display: flex;
+    max-width: 100vw;
+    min-width: 1000px;
+}
+/* -------diamond list------- */
+  .dia-submit{
+    float:right;
+    margin-left: 1000px;
+    margin-bottom: 40px;
+
+}  
+.dia-buttons{
+    display: inline-block;
+}
+.acceptance-message{
+    position: absolute;
+    top: 140px;
+    left: 0;
+    margin-left: 280px;
+    justify-content: center;
+    align-items: center;
+}
+.acceptance-message-data{
+    position: fixed;
+    top:500px;
+    right: 750px;
+    margin-top: 25px;
+}
+.diamond-export button{
+    position: absolute;
+    margin-left: 500px;
+    top: 70px;
+}
+
+.supplierreport{
+    overflow-x: scroll;
+    /* white-space: nowrap;*/
+    max-width: 100vw;
+    min-width: 1000px;
+}
+
+/* ------Headings------ */
+form h3 {
+    font-size: 18px;
+    margin-top: 0px !important;
+    margin-bottom: 6px;
+    left: 45%;
+    position: relative;
+    cursor: pointer;
+    display: inline-block; 
+    text-align: center;
+    align-items: center;
+}
+
+form h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0; 
+    background-color: rgb(111, 169, 231);
+    height: 0.1em; 
+    width: 100%; 
+    transform: scaleX(0);            /* Start hidden */
+    transform-origin: left;
+    transition: transform 0.3s ease; /* Smooth transition */
+}
+form h3:hover::after,
+form h3:focus::after {
+    transform: scaleX(1); 
+}
+.heading{
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+    position: relative;
+    /* cursor: pointer; */
+    display: inline-block; 
+    
+}
+.heading::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0; 
+    background-color: rgb(111, 169, 231);
+    height: 0.1em; 
+    width: 11%; 
+    transform: scaleX(0);            /* Start hidden */
+    transform-origin: left;
+    transition: transform 0.3s ease; /* Smooth transition */
+}
+.heading:hover::after,
+.heading:focus::after {
+    transform: scaleX(1); 
+}
+
+/* ------signup page------ */
+.signup{
+    background: linear-gradient(150deg, rgba(3,90,186,1) 21%, rgba(148,187,233,1) 100%);
+}
+.signup-button{
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;   
+}
+.sign-up{
+    background: white;
+    margin-left: 10px;
+    width:100px;
+}
+
+/* -------login page-------- */
+.login{
+    background: linear-gradient(150deg, rgba(3,90,186,1) 21%, rgba(148,187,233,1) 100%);
+}
+
+/* ---------child buttons------ */
+.add-diamond-table{ 
+    position: relative;
+}
+.add-diamond-button{
+    position: absolute;
+    bottom: 10px;
+    margin-top: 20px !important;
+}
+.add-clrstn-table{
+    position: relative;
+}
+.add-clrstn-button{
+    position: absolute;
+    bottom: 10px;
+    margin-top: 20px !important;
+}
+/* .diamond-list p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+.center p{
+    height: 500px;
+    overflow: hidden;
+    margin-top: 300px;
+}
+.center-data{
+    overflow: hidden;
+    margin-top: 250px;
+    margin-bottom: 500px;
+    /* margin-left: 800px; */
+    padding: 10px;
+}
+
+  .custom-scroll::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+  .custom-scroll {
+        scrollbar-width: none; /* For Firefox */
+}
+
+/* -----KYC------ */
+.accordion-btn {
+    position: relative;
+    background-color: #bd5ff359;
+    border: none;
+    padding: 15px 20px;
+    text-align: left;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.3s ease, transform 0.2s ease; /* Add transform transition */
+    background: rgb(52, 141, 236);
+    background: linear-gradient(90deg, rgb(72, 149, 231) 21%, rgba(148,187,233,1));
+}
+
+.accordion-btn:hover {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3) !important;
+    transform: scale(1.02); /* Slightly scale the button on hover */
+}
+
+.accordion-content {
+    background-color: #f8f8f8;   
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+    max-height: 0; /* Start collapsed */
+    overflow: hidden; /* Hide overflow */
+    opacity: 1; /* Start invisible */
+    transition: max-height 0.4s ease, opacity 0.4s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+@keyframes heightUp {
+    0% {
+        max-height: 0;
+    }
+    100% {
+        max-height: 2000px; 
+    }
+}
+
+
+.cutDiamond {
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+    border-width: 0 40px 40px 40px;
+    height: 0;
+    width: 10px;
+    position: relative;
+}
+.cutDiamond:after {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: -40px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    /* border-color: #103252 transparent transparent transparent; */
+    border-width: 50px 20px 0 40px;
+}
+ 
+   /* ----------Mobile view------ */
+@media only screen and (max-width: 600px) {
+    .table-container-one {
+        margin-top: 10px;
+    }
+    .checkbox-container{
+        margin-top: 10px !important;      
+    }
+    .checkbox-container label{
+       width: 50%;    
+    }
+    .products-container{
+        margin-top: 100px;
+    }
+    .diamond-list{
+        margin-top: 10px !important;
+    }
+    /* .pc-button{
+        top: -220px;
+        background-color: #000;
+    } */
+}
+@media only screen and (min-width : 1224px){
+    .center p{
+        height: 500px;
+        overflow: hidden;
+        margin-top: 300px;
+    }
+    .center-data{
+        overflow: hidden;
+        margin-top: 250px;
+        margin-bottom: 500px;
+        /* margin-left: 800px; */
+        padding: 10px;
+    }
+    /* .pc-button{
+        top: -520px;
+        background-color: #000;
+    } */
+}
+
+/* Custom Toast Container Styling */
+.custom-toast-container {
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 9999 !important;
+  }
+  
+  /* Styling for Toasts */
+  .Toastify__toast {
+    border-radius: 10px !important;  /* Rounded corners */
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Subtle shadow for toasts */
+    padding: 12px 20px;
+    background-color: #007BFF;  /* Single color background for all toasts */
+    color: #fff;  /* Text color */
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Remove icons */
+  .Toastify__toast-icon {
+    display: none !important;  /* Hide icons */
+  }
+  
+  /* Style for the Progress Bar */
+  .Toastify__progress-bar {
+    background-color: #FFEB3B !important;  /* A custom color for progress bar */
+    height: 5px;
+    border-radius: 2px;
+  }
+  
+  /* Hover effect on Toasts */
+  .Toastify__toast:hover {
+    opacity: 0.9;
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+  }
+  
+  /* Close Button Styles */
+  .Toastify__close-button {
+    color: #fff !important;
+    font-size: 18px;
+    opacity: 1 !important;
+  }
+  
+  .Toastify__close-button:hover {
+    color: #fff;
+    background-color: transparent;
+  }
+
+/* flex items-center justify-center */
