@@ -1,257 +1,4 @@
-// import React, { useContext, useEffect, useState } from "react";
-// import SubmittedDataComp from "../components/SubmittedDataComp";
-// import axios from "axios";
-// import { API } from "../../../config/configData";
-// import PurchaseOrderGenerator from "../components/PurchaseOrderGenerator";
-// import { DashBoardContext } from "../../../DashBoardContext/DashBoardContext";
-// import ContentLoader from "../../../DashBoardContext/ContentLoader";
-// import Snackbar from "../../../Components/Snackbar";
-// import { useSendToServer } from "../components/SendToServer";
 
-// function POApproval() {
-//   const [poCreationDatas, setPoCreationDatas] = useState([]);
-//   const [poAddressData, setPoAddressData] = useState(null);
-//   const [isLoading, setIsLoading] = useState(true);
-//   const [error, setError] = useState(null);
-//   const [suppliers, setSuppliers] = useState([]);
-//   const [poNumbers, setPoNumbers] = useState([]);
-//   const [selectedSupplier, setSelectedSupplier] = useState("");
-//   const [selectedPoNumber, setSelectedPoNumber] = useState("");
-//   const [fromDate, setFromDate] = useState("");
-//   const [toDate, setToDate] = useState("");
-//   const [filteredData, setFilteredData] = useState([]);
-//   const { userRole, roleData } = useContext(DashBoardContext);
-//   const [snackbar, setSnackbar] = useState({
-//     open: false,
-//     message: "",
-//     severity: "success",
-//   });
-
-//   // Function to show snackbar
-//   const showSnackbar = (message, severity = "success") => {
-//     setSnackbar({
-//       open: true,
-//       message,
-//       severity,
-//     });
-//   };
-//   const { generatePdf, isGenerating, errors } = useSendToServer({
-//     // submittedData: filteredSubmittedData,
-//     // poAddressData,
-//     onPdfGenerated: (pdfFile) => {
-//       console.log(pdfFile);
-//       console.log("PDF generated successfully");
-//     },
-//   });
-//   // Function to hide snackbar
-//   const hideSnackbar = () => {
-//     setSnackbar((prev) => ({
-//       ...prev,
-//       open: false,
-//     }));
-//   };
-//   console.log(roleData);
-//   // Function to reset all filters
-//   const resetFilters = () => {
-//     setSelectedSupplier("");
-//     setSelectedPoNumber("");
-//     setFromDate("");
-//     setToDate("");
-//     showSnackbar("Filters have been reset");
-//   };
-
-//   useEffect(() => {
-//     const fetchSupplier = async () => {
-//       try {
-//         const response = await axios.get(
-//           `${API}/gold_po/fetch_supplier/${userRole}`
-//         );
-//         console.log(response.data);
-//         setSuppliers(response.data.supplierNames);
-//       } catch (error) {
-//         console.error("Error fetching supplier and PO details:", error);
-//       }
-//     };
-//     fetchSupplier();
-//   }, []);
-
-//   useEffect(() => {
-//     const fetchPoDetails = async () => {
-//       try {
-//         const response = await axios.get(
-//           `${API}/gold_po/fetch_po_number/${selectedSupplier}/${userRole}/Pending`
-//         );
-//         console.log(response.data);
-//         setPoNumbers(response.data.filteredData.poNumbers);
-//       } catch (error) {
-//         console.error("Error fetching supplier and PO details:", error);
-//       }
-//     };
-
-//     if (selectedSupplier) {
-//       fetchPoDetails();
-//     } else {
-//       setPoNumbers([]);
-//     }
-//   }, [selectedSupplier]);
-
-//   const fetchPoCreationDetails = async () => {
-//     setIsLoading(true);
-//     setError(null);
-
-
-//     try {
-//       const response = await axios.get(
-//         `${API}/gold_po/fetch_po_creation?userRole=${userRole}
-//         &selectedSupplier=${selectedSupplier}&selectedPoNumber=${selectedPoNumber}&fromDate=${btoa(
-//           fromDate
-//         )}&toDate=${btoa(toDate)}&selectedPoStatus=Pending`
-//       );
-
-//       console.log("Full API response:", response.data);
-
-//       if (response.status === 200) {
-//         if (!response.data) {
-//           showSnackbar("No Data Found", "error");
-//           throw new Error("No data received from the API");
-//         }
-
-//         const addressData = response.data.address;
-//         const poCreationData = response.data.data;
-
-//         if (!poCreationData) {
-//           throw new Error("PO creation data is missing");
-//         }
-
-//         console.log("Address Data:", addressData);
-//         console.log("PO Creation Data:", poCreationData);
-
-//         setFilteredData(poCreationData);
-//         setPoAddressData(addressData ? addressData : {});
-//       } else {
-//         throw new Error(`Unexpected response status: ${response.status}`);
-//       }
-//     } catch (error) {
-//       console.error("Error fetching PO creation details:", error);
-//       showSnackbar("No Data Found", "error");
-//       setError(error.message);
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchPoCreationDetails();
-//   }, [selectedPoNumber, selectedSupplier, fromDate, toDate]);
-
-//   const handleSupplierChange = (event) => {
-//     setSelectedSupplier(event.target.value);
-//     // Reset PO number when supplier changes
-//     setSelectedPoNumber("");
-//   };
-
-//   const handlePoNumberChange = (event) => {
-//     setSelectedPoNumber(event.target.value);
-//   };
-
-//   const handleFromDateChange = (event) => {
-//     setFromDate(event.target.value);
-//   };
-
-//   const handleToDateChange = (event) => {
-//     setToDate(event.target.value);
-//   };
-
-//   return (
-//     <div className="space-y-4 m-10">
-//       <div className="flex flex-wrap gap-4 items-end">
-//         <div className="w-72">
-//           <select
-//             value={selectedSupplier}
-//             onChange={handleSupplierChange}
-//             className="w-full p-2 border rounded-md"
-//           >
-//             <option value="">Select Supplier</option>
-//             {suppliers.map((supplier, index) => (
-//               <option key={index} value={supplier}>
-//                 {supplier}
-//               </option>
-//             ))}
-//           </select>
-//         </div>
-//         <div className="w-72">
-//           <select
-//             value={selectedPoNumber}
-//             onChange={handlePoNumberChange}
-//             className="w-full p-2 border rounded-md"
-//           >
-//             <option value="">Select PO Number</option>
-//             {poNumbers.map((poNumber, index) => (
-//               <option key={index} value={poNumber}>
-//                 {poNumber}
-//               </option>
-//             ))}
-//           </select>
-//         </div>
-//         <div className="w-72">
-//           <input
-//             type="date"
-//             value={fromDate}
-//             onChange={handleFromDateChange}
-//             className="w-full p-2 border rounded-md"
-//             placeholder="From Date"
-//           />
-//         </div>
-//         <div className="w-72">
-//           <input
-//             type="date"
-//             value={toDate}
-//             onChange={handleToDateChange}
-//             className="w-full p-2 border rounded-md"
-//             placeholder="To Date"
-//           />
-//         </div>
-//         <button
-//           onClick={resetFilters}
-//           className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md transition-colors"
-//         >
-//           Reset Filters
-//         </button>
-//       </div>
-
-//       {isLoading ? (
-//         <ContentLoader variant="skeleton" />
-//       ) : error ? (
-//         <div className="text-red-500 py-4">No Data Found</div>
-//       ) : (
-//         <>
-//           <SubmittedDataComp
-//             submittedData={filteredData}
-//             ispocreation={false}
-//             ispproval={true}
-//             fetchPoCreationDetails={fetchPoCreationDetails}
-//             selectedPoNumber={selectedPoNumber}
-//           />
-//           <PurchaseOrderGenerator
-//             submittedData={filteredData}
-//             poAddressData={poAddressData}
-//             selectedPoNumber={selectedPoNumber}
-//           />
-//         </>
-//       )}
-//       <Snackbar
-//         open={snackbar.open}
-//         message={snackbar.message}
-//         severity={snackbar.severity}
-//         onClose={hideSnackbar}
-//         position="top-right"
-//         duration={5000}
-//       />
-//     </div>
-//   );
-// }
-
-// export default POApproval;
 
 import React, { useContext, useEffect, useState } from "react";
 import SubmittedDataComp from "../components/SubmittedDataComp";
@@ -266,7 +13,7 @@ import { useSendToServer } from "../components/SendToServer";
 function POApproval() {
   const [poCreationDatas, setPoCreationDatas] = useState([]);
   const [poAddressData, setPoAddressData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [suppliers, setSuppliers] = useState([]);
   const [poNumbers, setPoNumbers] = useState([]);
@@ -338,6 +85,7 @@ function POApproval() {
         );
         setPoNumbers(response.data.filteredData.poNumbers);
       } catch (error) {
+        setError('No Data Found')
         console.error("Error fetching supplier and PO details:", error);
         showSnackbar("Failed to fetch PO numbers", "error");
       }
@@ -414,7 +162,7 @@ function POApproval() {
   const handleToDateChange = (event) => {
     setToDate(event.target.value);
   };
-
+console.log(selectedPoNumber);
   return (
     <div className="w-full max-w-full">
       <div className="bg-white rounded-lg shadow-md p-4 mb-6">

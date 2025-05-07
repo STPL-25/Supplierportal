@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { DashBoardContextProvider } from './DashBoardContext/DashBoardContext.jsx'
 import withProtection from './Pages/withProtection.jsx';
+import withSecureApi from './DashBoardContext/withSecureApi.jsx'
 // import { MultiTabStateProvider } from './DashBoardContext/MultiTabStateContext .jsx'
 import { QueryClient,
   QueryClientProvider} from "@tanstack/react-query";

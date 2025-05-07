@@ -561,12 +561,12 @@ export const getColumns = (data) => {
             header: "Pt Net Wt" 
         },
         { 
-            width: "7%", 
+            width: "6%", 
             field: "melting", 
             header: "Melting %" 
         },
         { 
-            width: "7%", 
+            width: "8%", 
             field: "meltingWt", 
             header: "Melting wt",
             body: (rowData) => {
@@ -574,12 +574,12 @@ export const getColumns = (data) => {
             }
         },
         { 
-            width: "7%", 
+            width: "6%", 
             field: "wastage", 
             header: "Wastage %" 
         },
         { 
-            width: "7%", 
+            width: "8%", 
             field: "wastageWt", 
             header: "Wastage wt",
             body: (rowData) => {

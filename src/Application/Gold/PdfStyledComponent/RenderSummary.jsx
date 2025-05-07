@@ -1,9 +1,18 @@
-const renderSummary = (isLastPage, totals, data) => {
+import {
+  Document,
+  Page,
+  Text,
+  View,
+
+  Link,
+  Svg,
+  Path,
+} from "@react-pdf/renderer";
+import styles from "./PdfStyled";
+const RenderSummary = ({isLastPage, totals, datas}) => {
     if (!isLastPage) return null;
-  
-    // Check if we should show pure weight in summary
-    const showPureWeight = data.some((item) => item.productWeightage !== "Pcs");
-  
+  console.log("66666666666666666666666666",isLastPage, totals,datas);
+    const showPureWeight = datas.some((item) => item.productWeightage !== "Pcs");
     return (
       <View style={styles.summary}>
         <View style={styles.summaryRow}>
@@ -42,4 +51,4 @@ const renderSummary = (isLastPage, totals, data) => {
     );
   };
 
-  export default renderSummary;
+  export default RenderSummary;

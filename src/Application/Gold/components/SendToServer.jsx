@@ -21,7 +21,7 @@ import sktmspace from "../../../assets/stpl.png";
 import { saveAs } from "file-saver";
 import clsx from "clsx";
 import styles from "../PdfStyledComponent/PdfStyled";
-import renderSummary from "../PdfStyledComponent/RenderSummary";
+import RenderSummary from "../PdfStyledComponent/RenderSummary";
 import moment from "moment";
 import { DashBoardContext } from "../../../DashBoardContext/DashBoardContext";
 import { getColumns } from "../PdfStyledComponent/GetCoulmns";
@@ -342,7 +342,7 @@ const POPage = ({
           {/* PO Details Card */}
           <View style={styles.card}>
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionHeaderText}>PO Details</Text>
+              <Text style={styles.sectionHeaderText}>{isTct?"Job Order":"PO"} Details</Text>
             </View>
             <View style={styles.sectionContent}>
               <Text style={styles.label}>
@@ -396,9 +396,9 @@ const POPage = ({
                           typeof poAddressData.delivery === "string"
                             ? JSON.parse(poAddressData.delivery)
                             : poAddressData.delivery;
-                        return deliveryData.address || "No Address Found";
+                        return deliveryData.address || "A.Ku Towers, Crosscut Road,Coimbatore,Tamil Nadu,641012,0422-2490888";
                       }
-                      return "No Address Found";
+                      return "A.Ku Towers, Crosscut Road,Coimbatore,Tamil Nadu,641012,0422-2490888";
                     } catch (error) {
                       return "Error parsing delivery data";
                     }
@@ -553,50 +553,66 @@ const POPage = ({
 
       {/* Summary Section - Only on last page */}
       {/* {renderSummary(isLastPage, totals, data)} */}
-      <renderSummary isLastPage={isLastPage} totals={totals} data={data}/>
+      <RenderSummary isLastPage={isLastPage} totals={totals} data={data}/>
 
       {/* Footer */}
       {isLastPage && orderTypes !== "fair" && (
-        <View style={styles.footer}>
-          <Text style={styles.footerTitle}>
-            PURCHASE ORDER TERMS AND CONDITIONS
-          </Text>
-          {[
-            "Goods should be delivered within 15 days from the receipt of the purchase order.",
-            "Goods should be delivered in a completely finished manner.",
-            "If any of the products in this purchase order fail the hallmark test, the entire quantity in the purchase order may be returned at no cost to us.",
-            "The invoice should contain the purchase order number.",
-            "The bill set should include the following:",
-            `For any queries regarding this purchase order, please contact:${phoneNumber}`,
-          ].map((condition, index) => (
-            <View key={index}>
-              <Text style={styles.footerText}>
-                {index + 1}. {condition}
-              </Text>
-              {condition.includes("bill set") && (
-                <View style={{ marginLeft: 10 }}>
-                  {[
-                    "Courier receipt (if applicable) or the authorized person's name and phone number.",
-                    "Original invoice along with three copies.",
-                    "Packing list.",
-                    "Calculation workings.",
-                  ].map((item, subIndex) => (
-                    <Text key={subIndex} style={styles.footerText}>
-                      {String.fromCharCode(97 + subIndex)}) {item}
-                    </Text>
-                  ))}
-                </View>
-              )}
-            </View>
-          ))}
-          {approvedBy && (
-            <View style={styles.approvalInfo}>
-              <Text>Digitally Approved By: {approvedBy} (PM)</Text>
-              <Text>Date: {dateOnly}</Text>
-              <Text>Time: {timeOnly}</Text>
-            </View>
-          )}
-        </View>
+         <View style={styles.footer}>
+         <Text style={styles.footerTitle}>
+           {isTct ? "JOB" : "PURCHASE"} ORDER TERMS AND CONDITIONS
+         </Text>
+         {isTct
+           ? // Job order conditions
+             [
+               "Goods should be delivered within 15 days from the receipt of the Job order.",
+               "Goods should be delivered in a completely finished manner.",
+               "If any of the products in this Job order fail the hallmark test, the entire quantity in the Job order may be returned at no cost to us.",
+               "The invoice should contain the Job order number.",
+               `For any queries regarding this Job order, please contact: ${phoneNumber}.`,
+             ].map((condition, index) => (
+               <View key={index}>
+                 <Text style={styles.footerText}>
+                   {index + 1}. {condition}
+                 </Text>
+               </View>
+             ))
+           : // Purchase order conditions
+             [
+               "Goods should be delivered within 15 days from the receipt of the purchase order.",
+               "Goods should be delivered in a completely finished manner.",
+               "If any of the products in this purchase order fail the hallmark test, the entire quantity in the purchase order may be returned at no cost to us.",
+               "The invoice should contain the purchase order number.",
+               "The bill set should include the following:",
+               `For any queries regarding this purchase order, please contact: ${phoneNumber}.`,
+             ].map((condition, index) => (
+               <View key={index}>
+                 <Text style={styles.footerText}>
+                   {index + 1}. {condition}
+                 </Text>
+                 {condition.includes("bill set") && (
+                   <View style={{ marginLeft: 10 }}>
+                     {[
+                       "Courier receipt (if applicable) or the authorized person's name and phone number.",
+                       "Original invoice along with three copies.",
+                       "Packing list.",
+                       "Calculation workings.",
+                     ].map((item, subIndex) => (
+                       <Text key={subIndex} style={styles.footerText}>
+                         {String.fromCharCode(97 + subIndex)}) {item}
+                       </Text>
+                     ))}
+                   </View>
+                 )}
+               </View>
+             ))}
+         {approvedBy && (
+           <View style={styles.approvalInfo}>
+             <Text>Digitally Approved By: {approvedBy} (PM)</Text>
+             <Text>Date: {dateOnly}</Text>
+             <Text>Time: {timeOnly}</Text>
+           </View>
+         )}
+       </View>
       )}
 
       <Text style={styles.pageNumber}>

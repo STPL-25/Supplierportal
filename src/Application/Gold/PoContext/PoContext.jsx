@@ -23,6 +23,93 @@ const PoProvider = ({ children }) => {
     { label: "95", value: "95" },
     { label: "99.9", value: "99.9" },
   ];
+
+  const COMPANY_PRESETS = {
+    tct: {
+      name: "THE CHENNAI TRADERS",
+      subTitle: "",
+      doorNo: "No.966-972",
+      streetName: "Crosscut Road",
+      city: "Coimbatore",
+      state: "Tamil Nadu",
+      pincode: "641012",
+      phone: "0422-2490888",
+      email: "info@sktm.in",
+      gstNo: "33AAKFK9153A1ZJ",
+      poPreFix: "TCT",
+    },
+    spacetextiles: {
+      name: "Sree Kumaran Thangamaligai",
+      subTitle: "(A Unit Of Space Textiles Pvt Ltd)",
+      doorNo: "A.Ku Towers",
+      streetName: "Crosscut Road",
+      city: "Coimbatore",
+      state: "Tamil Nadu",
+      pincode: "641012",
+      phone: "0422-2490888",
+      email: "info@sktm.in",
+      gstNo: "33AAKCS0757M1Z0",
+      poPreFix: "STPL",
+    },
+    garsons: {
+      name: "Sree Kumaran Thangamaligai",
+      subTitle: "(A Unit of Garsons Private Limited)",
+      doorNo: "A.Ku Towers",
+      streetName: "Crosscut Road",
+      city: "Coimbatore",
+      state: "Tamil Nadu",
+      pincode: "641012",
+      phone: "0422-2490888",
+      email: "info@garsons.in",
+      gstNo: "33AABCG8863D1ZP",
+      poPreFix: "GPL",
+    },
+  };
+  const initialState = {
+    from: {
+      name: "",
+      subTitle: "",
+      doorNo: "",
+      streetName: "",
+      city: "",
+      state: "",
+      pincode: "",
+      phone: "",
+      email: "",
+      gstNo: "",
+    },
+    supplier: {
+      name: "",
+      doorNo: "",
+      streetName: "",
+      city: "",
+      area: "",
+      state: "",
+      pincode: "",
+      phone: "",
+      email: "",
+      gstNo: "",
+    },
+    poDetails: {
+      // poNumber: "",
+      poDate: new Date().toISOString().split("T")[0],
+      dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .split("T")[0],
+      mode: "purchase",
+    },
+    counterDetails: {
+      counter: "",
+      purchaseIncharge: "",
+      purchaseManager: "",
+    },
+    delivery: {
+      locationType: "direct",
+      paymentType:'',
+      address:
+        "A.Ku Towers, Crosscut Road,Coimbatore,Tamil Nadu,641012,0422-2490888",
+    },
+  };
   const { userRole, user } = useContext(DashBoardContext);
   const [formData, setFormData] = useState({
     sno: "",
@@ -201,7 +288,7 @@ const PoProvider = ({ children }) => {
         errors,
         setErrors,
         selectedTypes,
-        setSelectedTypes,
+        setSelectedTypes,COMPANY_PRESETS,initialState
       }}
     >
       {children}

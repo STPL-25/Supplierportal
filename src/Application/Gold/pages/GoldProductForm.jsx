@@ -29,7 +29,8 @@ const GoldProductForm = () => {
     silverMelting,
     errors,
     setErrors,
-    selectedTypes, setSelectedTypes
+    selectedTypes,
+    setSelectedTypes,
   } = useContext(PoContext);
   let metal = userRole?.split("-")[0];
   const [submittedData, setSubmittedData] = useState([]);
@@ -39,8 +40,8 @@ const GoldProductForm = () => {
   const [poAddressData, setPoAddressData] = useState(null);
   const { validateField } = useValidation();
   const { compressAndConvertToJPG, isCompressing } = useImageCompression(100);
- 
-  const [meltingOptions,setMeltingOptions]=useState([])
+
+  const [meltingOptions, setMeltingOptions] = useState([]);
 
   // Melting options based on metal type
   console.log(isCompressing);
@@ -221,30 +222,31 @@ const GoldProductForm = () => {
       photo: data.product_image,
       netWt: data.net_weight || "",
       pureWt: data.pure_weight || "",
-      productWeightage: data.productWeightage||"Gram",
+      productWeightage: { 
+        label: data.productWeightage || "Gram", 
+        value: data.productWeightage || "Gram" 
+      },
       goldwt: data.goldwt,
       platinumWt: data.platinumWt,
-      diacent:data.diamondwt,
-      productType:data.productType||"GO",
-      mc:data.makingCharges
+      diacent: data.diamondwt,
+      productType: data.productType || "GO",
+      mc: data.makingCharges,
     });
     let parsedTypes;
 
-try {
-  const maybeParsed = JSON.parse(data.productAvlTypes);
+    try {
+      const maybeParsed = JSON.parse(data.productAvlTypes);
 
-  // If it's still a string (i.e., double-encoded), parse again
-  parsedTypes = typeof maybeParsed === 'string'
-    ? JSON.parse(maybeParsed)
-    : maybeParsed;
-} catch (err) {
-  parsedTypes = {}; // or [] or null — whatever makes sense as a fallback
-}
+      // If it's still a string (i.e., double-encoded), parse again
+      parsedTypes =
+        typeof maybeParsed === "string" ? JSON.parse(maybeParsed) : maybeParsed;
+    } catch (err) {
+      parsedTypes = {}; // or [] or null — whatever makes sense as a fallback
+    }
 
-setSelectedTypes(parsedTypes);
-
+    setSelectedTypes(parsedTypes);
   };
-
+console.log(formData);
   const handleDelete = async (id) => {
     try {
       console.log(id);
@@ -421,11 +423,12 @@ setSelectedTypes(parsedTypes);
         setFormData({
           product: null,
           metal_type: userRole.includes("Gold")
-          ? "Gold"
-          : userRole.includes("Silver")
-          ? "Silver"
-          :  userRole.includes("Diamond")
-          ? "Diamond":'',
+            ? "Gold"
+            : userRole.includes("Silver")
+            ? "Silver"
+            : userRole.includes("Diamond")
+            ? "Diamond"
+            : "",
           productName: "",
           orderType: "office",
           pieces: "",
@@ -438,22 +441,23 @@ setSelectedTypes(parsedTypes);
           photo: null,
           melting: null,
           wastage: null,
-          diacent:'',
+          diacent: "",
           pureWt: "",
           edit: false,
           photoUrl: "",
-          productType: userRole.includes("Gold")?"GO" :userRole.includes("Diamond")?"DIA":"GO",
+          productType: userRole.includes("Gold")
+            ? "GO"
+            : userRole.includes("Diamond")
+            ? "DIA"
+            : "GO",
           productWeightage: "Gram",
-          mc:''
-
-
-          
+          mc: "",
         });
         setSelectedTypes({
           Gold: userRole.includes("Diamond") ? true : false,
           Diamond: userRole.includes("Diamond") ? true : false,
           Platinum: false,
-        })
+        });
         fetchPoUserDetails();
         setErrors({});
         showSnackbar("Product added successfully!");
@@ -478,6 +482,8 @@ setSelectedTypes(parsedTypes);
 
   return (
     <div className="p-4 md:p-6 max-w-10xl mx-auto bg-white rounded-xl shadow-lg">
+   
+
       <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 md:mb-6 ">
         {userRole?.split("-")[0]} Purchase Order
       </h2>
@@ -631,9 +637,9 @@ setSelectedTypes(parsedTypes);
                   { label: "Gram", value: "Gram" },
                   { label: "Pcs", value: "Pcs" },
                 ]}
-                value={formData?.productWeightage}
+                value={formData?.productWeightage||"Gram"}
                 onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, productWeightage: value }))
+                  setFormData((prev) => ({ ...prev, productWeightage: value ||formData?.productWeightage}))
                 }
                 error={errors.productWeightage}
               />
@@ -657,7 +663,7 @@ setSelectedTypes(parsedTypes);
             onChange={handleInputChange}
             error={errors.grossWt}
           />
-          {(selectedTypes.Diamond) && (
+          {selectedTypes.Diamond && (
             <>
               <CustomInput
                 label="Diamond Carat"
@@ -668,7 +674,7 @@ setSelectedTypes(parsedTypes);
               />
             </>
           )}
-          
+
           <CustomInput
             label="Stone Weight in (gm)"
             name="stoneWt"
@@ -690,7 +696,7 @@ setSelectedTypes(parsedTypes);
             onChange={handleInputChange}
             error={errors.waxWt}
           />
-  {(selectedTypes.Gold&&selectedTypes.Platinum) && (
+          {selectedTypes.Gold && selectedTypes.Platinum && (
             <>
               <CustomInput
                 label="Gold net wt"
@@ -699,7 +705,7 @@ setSelectedTypes(parsedTypes);
                 onChange={handleInputChange}
                 error={errors.goldwt}
               />
-               <CustomInput
+              <CustomInput
                 label="Platinum Grs wt"
                 name="platinumWt"
                 value={formData.platinumWt}
@@ -708,7 +714,7 @@ setSelectedTypes(parsedTypes);
               />
             </>
           )}
-        
+
           {/* {(selectedTypes.Gold&&selectedTypes.Platinum) && (
             <>
              <CustomInput
@@ -728,7 +734,7 @@ setSelectedTypes(parsedTypes);
             </>
           )} */}
           <CustomInput
-            label={selectedTypes.Platinum?"Pt Net Weight":"Net Weight"}
+            label={selectedTypes.Platinum ? "Pt Net Weight" : "Net Weight"}
             name="netWt"
             value={formData.netWt}
             disabled={true}
@@ -742,40 +748,38 @@ setSelectedTypes(parsedTypes);
             error={errors.amount}
           />
           {/* {formData?.productWeightage?.value === "Gram" && ( */}
-
           {(formData?.productWeightage?.value === "Gram" ||
-            formData.metal_type === "Gold" 
-            && (
+            formData.metal_type === "Gold")  && (
+              <>
+                <CustomSelect
+                  label="Melting"
+                  options={meltingOptions}
+                  value={formData.melting}
+                  onChange={(value) =>
+                    setFormData((prev) => ({ ...prev, melting: value }))
+                  }
+                  error={errors.melting}
+                />
+                <CustomInput
+                  label="Wastage"
+                  name="wastage"
+                  value={formData.wastage?.value || ""}
+                  onChange={handleInputChange}
+                  error={errors.wastage}
+                />
+
+                <CustomInput
+                  label="Making Charges"
+                  name="mc"
+                  value={formData.mc}
+                  onChange={handleInputChange}
+                  error={errors.mc}
+                />
+              </>
+            )}
+          {selectedTypes.Gold && selectedTypes.Platinum && (
             <>
               <CustomSelect
-                label="Melting"
-                options={meltingOptions}
-                value={formData.melting}
-                onChange={(value) =>
-                  setFormData((prev) => ({ ...prev, melting: value }))
-                }
-                error={errors.melting}
-              />
-              <CustomInput
-                label="Wastage"
-                name="wastage"
-                value={formData.wastage?.value || ""}
-                onChange={handleInputChange}
-                error={errors.wastage}
-              />
-
-              <CustomInput
-                label="Making Charges"
-                name="mc"
-                value={formData.mc}
-                onChange={handleInputChange}
-                error={errors.mc}
-              />
-            </>
-          ))}
-  {(selectedTypes.Gold&&selectedTypes.Platinum) && (
-    <>
-     <CustomSelect
                 label="Gold Melting"
                 options={meltingOptions}
                 value={formData.melting}
@@ -784,7 +788,7 @@ setSelectedTypes(parsedTypes);
                 }
                 error={errors.melting}
               />
-               <CustomSelect
+              <CustomSelect
                 label="Platinum Melting"
                 options={meltingOptions}
                 value={formData.melting}
@@ -793,7 +797,7 @@ setSelectedTypes(parsedTypes);
                 }
                 error={errors.melting}
               />
-               {/* <CustomInput
+              {/* <CustomInput
               label="Gold PureWt"
               name="pureWt"
               value={formData.pureWt}
@@ -801,20 +805,24 @@ setSelectedTypes(parsedTypes);
               disabled
               error={errors.pureWt}
             /> */}
-             <CustomInput
-              label="Platinum PureWt"
-              name="pureWt"
-              value={formData.pureWt}
-              onChange={handleInputChange}
-              disabled
-              error={errors.pureWt}
-            />
-    </>
-  )}
+              <CustomInput
+                label="Platinum PureWt"
+                name="pureWt"
+                value={formData.pureWt}
+                onChange={handleInputChange}
+                disabled
+                error={errors.pureWt}
+              />
+            </>
+          )}
           {/* )} */}
           {formData.metal_type !== "Silver" && (
             <CustomInput
-              label={selectedTypes.Gold&&selectedTypes.Platinum?"Gold pure Wt":"PureWt"}
+              label={
+                selectedTypes.Gold && selectedTypes.Platinum
+                  ? "Gold pure Wt"
+                  : "PureWt"
+              }
               name="pureWt"
               value={formData.pureWt}
               onChange={handleInputChange}
